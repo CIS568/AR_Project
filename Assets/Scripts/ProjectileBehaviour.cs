@@ -32,7 +32,8 @@ namespace MyFirstARGame
                 if (other.gameObject.GetComponent<ShieldBehavior>())
                 {
                     var view = other.gameObject.GetPhotonView();
-                    GameLogic.Comm.UpdateScore(view.Owner, GameLogic.Comm.GetScore(view.Owner) + 1);
+                    var myView = gameObject.GetPhotonView();
+                    GameLogic.Comm.UpdateScore(myView.Owner, GameLogic.Comm.GetScore(myView.Owner) + 1);
                     GameLogic.Comm.Destroy(view.ViewID);
                 }
             }
