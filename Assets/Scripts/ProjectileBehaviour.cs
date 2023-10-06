@@ -31,8 +31,8 @@ namespace MyFirstARGame
             if (proj && PhotonNetwork.IsMasterClient)
             {
                 var view = other.gameObject.GetPhotonView();
-                GameLogic.Comm.Destroy(view.ViewID);
                 GameLogic.Comm.UpdateScore(view.Owner, GameLogic.Comm.GetScore(view.Owner) + 1);
+                GameLogic.Comm.Destroy(view.ViewID);
             }
         }
 
