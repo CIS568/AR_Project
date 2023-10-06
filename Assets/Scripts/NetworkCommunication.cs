@@ -13,7 +13,7 @@ namespace MyFirstARGame
         // Start is called before the first frame update
         void Start()
         {
-
+            Debug.Log($"IsMaster: {PhotonNetwork.IsMasterClient}");
         }
 
         // Update is called once per frame
