@@ -114,8 +114,14 @@ namespace MyFirstARGame
         {
             if (PhotonNetwork.IsMasterClient)
             {
-                Debug.Log($"player {newPlayer.ActorNumber} joined!");
                 NetworkCommunication.UpdateScore(newPlayer, 0);
+                foreach (var p in PhotonNetwork.PlayerList)
+                {
+                    if (p.ActorNumber != newPlayer.ActorNumber)
+                    {
+                        NetworkCommunication.UpdateScore(newPlayer, p, NetworkCommunication.GetScore(p));
+                    }
+                }
             }
         }
     }

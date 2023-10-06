@@ -40,7 +40,16 @@ namespace MyFirstARGame
                 GameOver(player.ActorNumber);
             }
         }
+        public void UpdateScore(Player target, Player player, int score)
+        {
+            var pName = $"Player {player.ActorNumber}";
+            photonView.RPC("Network_SetPlayerScore", target, pName, score);
 
+            if (score >= 10)
+            {
+                GameOver(player.ActorNumber);
+            }
+        }
         public void Destroy(int viewId)
         {
             photonView.RPC("Network_Destroy", RpcTarget.All, viewId);
