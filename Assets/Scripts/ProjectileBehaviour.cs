@@ -36,6 +36,14 @@ namespace MyFirstARGame
                     GameLogic.Comm.UpdateScore(myView.Owner, GameLogic.Comm.GetScore(myView.Owner) + 1);
                     GameLogic.Comm.Destroy(view.ViewID);
                 }
+
+                if (other.gameObject.GetComponent<MineBehavior>())
+                {
+                    var view = other.gameObject.GetPhotonView();
+                    var myView = gameObject.GetPhotonView();
+                    GameLogic.Comm.UpdateScore(myView.Owner, GameLogic.Comm.GetScore(myView.Owner) - 1);
+                    GameLogic.Comm.Destroy(view.ViewID);
+                }
             }
         }
 

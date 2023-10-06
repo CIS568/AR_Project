@@ -5,6 +5,7 @@ namespace MyFirstARGame
     using Photon.Pun;
     using UnityEngine;
     using Photon.Realtime;
+    using UnityEngine.XR.ARFoundation;
     
     /// <summary>
     /// You can use this class to make RPC calls between the clients. It is already spawned on each client with networking capabilities.
@@ -32,6 +33,8 @@ namespace MyFirstARGame
 
         public void UpdateScore(Player player, int score)
         {
+            if (score < 0) score = 0;
+
             var pName = $"Player {player.ActorNumber}";
             photonView.RPC("Network_SetPlayerScore", RpcTarget.All, pName, score);
 
@@ -98,6 +101,10 @@ namespace MyFirstARGame
             if (!PhotonNetwork.IsMasterClient)
             {
                 PhotonNetwork.LoadLevel(0);
+            }
+            else
+            {
+                PhotonNetwork.DestroyAll();
             }
         }
     }
