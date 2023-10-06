@@ -7,6 +7,19 @@ namespace MyFirstARGame
 {
     public class GameLogic : MonoBehaviour
     {
+        private static NetworkCommunication _comm;
+        private static NetworkCommunication Comm
+        {
+            get
+            {
+                if (_comm == null)
+                {
+                    _comm = FindObjectOfType<NetworkCommunication>();
+                }
+                return _comm;
+            }
+        }
+
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         static void OnBeforeSceneLoad()
         {
@@ -25,8 +38,12 @@ namespace MyFirstARGame
 
         public static void IncrementScore()
         {
-            var networkComm = FindObjectOfType<NetworkCommunication>();
-            networkComm?.IncrementScore();
+            Comm.IncrementScore();
+        }
+
+        public static void Destroy(int id)
+        {
+            Comm.Destroy(id);
         }
     }
 }

@@ -21,11 +21,11 @@ namespace MyFirstARGame
 
         void OnCollisionEnter(Collision other)
         {
-            var proj = other.gameObject.GetComponent<ProjectileBehaviour>();
+/*            var proj = other.gameObject.GetComponent<ProjectileBehaviour>();
             if (proj)
             {
                 PhotonNetwork.Destroy(gameObject);
-            }
+            }*/
         }
     }
 }

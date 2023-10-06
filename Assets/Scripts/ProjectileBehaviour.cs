@@ -28,12 +28,9 @@ namespace MyFirstARGame
         void OnCollisionEnter(Collision other)
         {
             var proj = other.gameObject.GetComponent<ShieldBehavior>();
-            if (proj)
+            if (proj && PhotonNetwork.IsMasterClient)
             {
-                if (GameLogic.IsOffensive())
-                {
-                    GameLogic.IncrementScore();
-                }
+                GameLogic.Destroy(other.gameObject.GetPhotonView().ViewID);
             }
         }
 

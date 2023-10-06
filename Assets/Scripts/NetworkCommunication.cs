@@ -36,10 +36,25 @@ namespace MyFirstARGame
             photonView.RPC("Network_SetPlayerScore", player, pName, curScore);
         }
 
+        public void Destroy(int viewId)
+        {
+            photonView.RPC("Network_Destroy", RpcTarget.All, viewId);
+        }
+
         [PunRPC]
         public void Network_SetPlayerScore(string playerName, int newScore)
         {
             scoreBoard.SetScore(playerName, newScore);
+        }
+
+        [PunRPC]
+        public void Network_Destroy(int viewId)
+        {
+            PhotonView targetShield = PhotonView.Find(viewId);
+            if (targetShield != null)
+            {
+                Destroy(targetShield.gameObject);
+            }
         }
     }
 
