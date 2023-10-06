@@ -8,7 +8,7 @@ namespace MyFirstARGame
     public class GameLogic : MonoBehaviour
     {
         private static NetworkCommunication _comm;
-        private static NetworkCommunication Comm
+        public static NetworkCommunication Comm
         {
             get
             {
@@ -34,16 +34,6 @@ namespace MyFirstARGame
         public static bool IsOffensive()
         {
             return PhotonNetwork.LocalPlayer.ActorNumber % 2 == 1;
-        }
-
-        public static void IncrementScore()
-        {
-            Comm.IncrementScore();
-        }
-
-        public static void Destroy(int id)
-        {
-            Comm.Destroy(id);
         }
     }
 }

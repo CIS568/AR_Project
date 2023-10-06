@@ -13,19 +13,28 @@ namespace MyFirstARGame
         
         }
 
+
+        private float _timer = 0.0f;
+
+        private bool _destroyed = false;
         // Update is called once per frame
         void Update()
         {
-        
-        }
-
-        void OnCollisionEnter(Collision other)
-        {
-/*            var proj = other.gameObject.GetComponent<ProjectileBehaviour>();
-            if (proj)
+            if (_destroyed)
             {
-                PhotonNetwork.Destroy(gameObject);
-            }*/
+                return;
+            }
+
+            _timer += Time.deltaTime;
+
+            if (_timer >= 2.0f)
+            {
+                var view = gameObject.GetPhotonView();
+                GameLogic.Comm.Destroy(view.ViewID);
+                GameLogic.Comm.UpdateScore(view.Owner, GameLogic.Comm.GetScore(view.Owner) + 1);
+
+                _destroyed = true;
+            }
         }
     }
 }

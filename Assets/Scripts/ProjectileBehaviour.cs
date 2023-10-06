@@ -30,7 +30,9 @@ namespace MyFirstARGame
             var proj = other.gameObject.GetComponent<ShieldBehavior>();
             if (proj && PhotonNetwork.IsMasterClient)
             {
-                GameLogic.Destroy(other.gameObject.GetPhotonView().ViewID);
+                var view = other.gameObject.GetPhotonView();
+                GameLogic.Comm.Destroy(view.ViewID);
+                GameLogic.Comm.UpdateScore(view.Owner, GameLogic.Comm.GetScore(view.Owner) + 1);
             }
         }
 

@@ -116,7 +116,7 @@ namespace MyFirstARGame
                 return;
 
             Debug.Log($"player {newPlayer.ActorNumber} joined!");
-            this.NetworkCommunication.UpdateForNewPlayer(newPlayer);
+            GameLogic.Comm.UpdateScore(newPlayer, 0);
         }
     }
 }

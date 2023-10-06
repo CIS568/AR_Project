@@ -36,6 +36,7 @@
             var obj = GameLogic.IsOffensive() ? projectilePrefab.name : shieldPrefab.name ;
             var projectile = PhotonNetwork.Instantiate(obj, ray.origin, Quaternion.identity, data: initialData);
 
+
             // By default, the projectile is kinematic in the prefab. This is because it should not be affected by physics
             // on clients other than the one owning it. Hence we disable kinematic mode and let the physics engine take over here.
             // It might make sense to have all game physics run on the server for a more complex scenario. You could transfer
