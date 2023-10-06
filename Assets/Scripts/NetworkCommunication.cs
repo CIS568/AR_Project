@@ -57,10 +57,7 @@ namespace MyFirstARGame
 
         public void RestartGame()
         {
-            if (SceneManager.GetActiveScene().buildIndex == 1)
-            {
-                PhotonNetwork.LoadLevel(0);
-            }
+            photonView.RPC("Network_Restart", RpcTarget.All);
         }
 
         public void GameOver(int winner)
@@ -93,6 +90,15 @@ namespace MyFirstARGame
         public void Network_GameOver(int winner)
         {
             GameLogic.StartGameOverSeq(winner);
+        }
+
+        [PunRPC]
+        public void Network_Restart()
+        {
+            if (SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                PhotonNetwork.LoadLevel(0);
+            }
         }
     }
 
