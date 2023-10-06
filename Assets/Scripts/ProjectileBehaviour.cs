@@ -10,7 +10,6 @@ namespace MyFirstARGame
     {
         [SerializeField]
         private Material[] projectileMaterials;
-        public bool IsShield { get; set; }
 
         private void Awake()
         {
@@ -24,8 +23,6 @@ namespace MyFirstARGame
                 var material = this.projectileMaterials[playerId % this.projectileMaterials.Length];
                 this.transform.GetComponent<Renderer>().material = material;
             }
-
-            IsShield = gameObject.CompareTag("shield");
         }
 
         void OnCollisionEnter(Collision other)
@@ -42,10 +39,6 @@ namespace MyFirstARGame
 
         void Update()
         {
-            if (IsShield)
-            {
-
-            }
         }
     }
 }
