@@ -34,18 +34,20 @@
             // velocity direction.
             var ray = this.GetComponent<Camera>().ScreenPointToRay(position);
 
-            var obj = PhotonNetwork.LocalPlayer.ActorNumber % 2 == 0 ?
-                projectilePrefab : shieldPrefab ;
-
+            var obj = GameLogic.IsOffensive() ? projectilePrefab : shieldPrefab ;
             var projectile = PhotonNetwork.Instantiate(obj.name, ray.origin, Quaternion.identity, data: initialData);
 
             // By default, the projectile is kinematic in the prefab. This is because it should not be affected by physics
             // on clients other than the one owning it. Hence we disable kinematic mode and let the physics engine take over here.
             // It might make sense to have all game physics run on the server for a more complex scenario. You could transfer
             // ownership here to the server.
-            var rigidbody = projectile.GetComponent<Rigidbody>();
-            rigidbody.isKinematic = false;
-            rigidbody.velocity = ray.direction * initialSpeed;
+
+            if (GameLogic.IsOffensive())
+            {
+                var rg = projectile.GetComponent<Rigidbody>();
+                rg.isKinematic = false;
+                rg.velocity = ray.direction * initialSpeed;
+            }
 
             var networkComm = FindObjectOfType<NetworkCommunication>();
             networkComm.IncrementScore();

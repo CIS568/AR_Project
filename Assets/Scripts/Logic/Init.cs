@@ -12,7 +12,7 @@ namespace MyFirstARGame
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         static void OnBeforeSceneLoad()
         {
-            new GameObject().AddComponent<Init>();
+            new GameObject("Init").AddComponent<Init>();
         }
 
         private void Update()
