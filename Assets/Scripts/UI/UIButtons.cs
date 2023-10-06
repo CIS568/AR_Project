@@ -2,7 +2,6 @@
 {
     using UnityEngine;
     using UnityEngine.UI;
-    using UnityEngine.XR.Interaction.Toolkit.AR;
 
     /// <summary>
     /// Implements UI button functionality. See <see cref="UnityEngine.XR.ARFoundation.Samples.BackButton"/> for the back button implementation.
@@ -13,10 +12,10 @@
         private GameObject canvas;
 
         [SerializeField]
-        private GameObject togglePlacementButton;
+        private Button togglePlacementButton;
 
         [SerializeField]
-        private GameObject toggleManipulateButton;
+        private Button restartBtn;
 
         private bool isPlacing;
         private bool isManipulating;
@@ -24,18 +23,21 @@
         /// <summary>
         /// Gets a value indicating whether the user is currently idle, i.e., no special UI mode is active.
         /// </summary>
-        public bool IsIdle => !this.isPlacing && !this.isManipulating;
+        public bool IsIdle => !this.isPlacing;
 
-        public void TogglePlacementButtonPressed()
+        void Awake()
         {
-            this.SetManipulateState(false);
+            togglePlacementButton.onClick.AddListener(TogglePlacementButtonPressed);
+        }
+
+        void TogglePlacementButtonPressed()
+        {
             this.SetPlacementState(!this.isPlacing);
         }
 
-        public void ToggleManipulateButtonPressed()
+        void RestartBtnPressed()
         {
-            this.SetPlacementState(false);
-            this.SetManipulateState(!this.isManipulating);
+            GameLogic.Comm.RestartGame();
         }
 
         /// <summary>
@@ -71,25 +73,7 @@
             }
         }
 
-        private void SetManipulateState(bool state)
-        {
-            this.isManipulating = state;
-            var placeOnPlane = FindObjectOfType<PlaceOnPlane>();
-            if (placeOnPlane != null)
-            {
-                var spawnedObect = placeOnPlane.SpawnedObject;
-                if (spawnedObect != null)
-                {
-                    if (spawnedObect.TryGetComponent<ARSelectionInteractable>(out var arInteractable))
-                    {
-                        arInteractable.enabled = this.isManipulating;
-                        this.SetButtonState(this.toggleManipulateButton, this.isManipulating);
-                    }
-                }
-            }
-        }
-
-        private void SetButtonState(GameObject button, bool state)
+        private void SetButtonState(Button button, bool state)
         {
             button.GetComponent<Image>().color = state ? Color.green : Color.white;
         }

@@ -1,3 +1,5 @@
+using UnityEngine.SceneManagement;
+
 namespace MyFirstARGame
 {
     using Photon.Pun;
@@ -37,6 +39,11 @@ namespace MyFirstARGame
         public void Destroy(int viewId)
         {
             photonView.RPC("Network_Destroy", RpcTarget.All, viewId);
+        }
+
+        public void RestartGame()
+        {
+            PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().name);
         }
 
         [PunRPC]
