@@ -99,10 +99,6 @@ namespace MyFirstARGame
             {
                 PhotonNetwork.LoadLevel(0);
             }
-            else
-            {
-                PhotonNetwork.Disconnect();
-            }
         }
     }
 

@@ -1,23 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using Photon.Pun;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MyFirstARGame
 {
     public class Init : MonoBehaviour
     {
-        bool done = false;
-
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         static void OnBeforeSceneLoad()
         {
             new GameObject("Init").AddComponent<Init>();
         }
 
-        private void Update()
+        void Awake()
         {
-
+            if (SceneManager.GetActiveScene().buildIndex == 0)
+            {
+                if(PhotonNetwork.IsConnected)
+                    PhotonNetwork.Disconnect();
+            }
         }
     }
 }
