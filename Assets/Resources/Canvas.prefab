@@ -718,6 +718,7 @@ MonoBehaviour:
   canvas: {fileID: 2064423250385086124}
   togglePlacementButton: {fileID: 2644184772052372951}
   restartBtn: {fileID: 82255519061937843}
+  textMesh: {fileID: 4762798206597621936}
 --- !u!1 &7484852537727629712
 GameObject:
   m_ObjectHideFlags: 0
