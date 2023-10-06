@@ -43,14 +43,14 @@ namespace MyFirstARGame
 
         void OnGUI()
         {
-            var p = Camera.main.WorldToScreenPoint(transform.position);
+/*            var p = Camera.main.WorldToScreenPoint(transform.position);
 
             var save = GUI.color;
             GUI.color = Color.blue;
             GUILayout.BeginArea(new Rect(p.x, Screen.height - p.y, 200, 200));
             GUILayout.Label($"Owner = Player {gameObject.GetPhotonView().Owner.ActorNumber}");
             GUILayout.EndArea();
-            GUI.color = save;
+            GUI.color = save;*/
         }
     }
 }

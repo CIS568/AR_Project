@@ -34,6 +34,11 @@ namespace MyFirstARGame
         {
             var pName = $"Player {player.ActorNumber}";
             photonView.RPC("Network_SetPlayerScore", RpcTarget.All, pName, score);
+
+            if (score >= 10)
+            {
+                GameOver(player.ActorNumber);
+            }
         }
 
         public void Destroy(int viewId)
@@ -43,7 +48,12 @@ namespace MyFirstARGame
 
         public void RestartGame()
         {
-            PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().name);
+            photonView.RPC("Network_RestartLevel", RpcTarget.All);
+        }
+
+        public void GameOver(int winner)
+        {
+            photonView.RPC("Network_GameOver", RpcTarget.All, winner);
         }
 
         [PunRPC]
@@ -65,6 +75,21 @@ namespace MyFirstARGame
 
                 // Destroy(targetShield.gameObject);
             }
+        }
+
+        [PunRPC]
+        public void Network_RestartLevel()
+        {
+            if (SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                SceneManager.LoadScene(1);
+            }
+        }
+
+        [PunRPC]
+        public void Network_GameOver(int winner)
+        {
+            GameLogic.StartGameOverSeq(winner);
         }
     }
 
