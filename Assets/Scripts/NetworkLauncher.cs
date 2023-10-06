@@ -112,11 +112,11 @@ namespace MyFirstARGame
 
         public override void OnPlayerEnteredRoom(Player newPlayer)
         {
-            if (newPlayer == null || NetworkCommunication == null) 
-                return;
-
-            Debug.Log($"player {newPlayer.ActorNumber} joined!");
-            GameLogic.Comm.UpdateScore(newPlayer, 0);
+            if (PhotonNetwork.IsMasterClient)
+            {
+                Debug.Log($"player {newPlayer.ActorNumber} joined!");
+                NetworkCommunication.UpdateScore(newPlayer, 0);
+            }
         }
     }
 }
