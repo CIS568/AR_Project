@@ -1,5 +1,3 @@
-using Needle.XR.ARSimulation;
-using Needle.XR.ARSimulation.ExampleComponents;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -19,15 +17,7 @@ namespace MyFirstARGame
 
         private void Update()
         {
-            if(!done)
-            {
-                var ex = FindObjectOfType<InstantiateAtRaycastHitExample>();
-                if (ex)
-                {
-                    ex.enabled = false;
-                    done = true;
-                }
-            }
+
         }
     }
 }
