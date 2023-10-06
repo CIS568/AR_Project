@@ -1,4 +1,6 @@
-﻿namespace MyFirstARGame
+﻿using TMPro;
+
+namespace MyFirstARGame
 {
     using UnityEngine;
     using UnityEngine.UI;
@@ -17,6 +19,9 @@
         [SerializeField]
         private Button restartBtn;
 
+        [SerializeField]
+        private TextMeshProUGUI textMesh;
+
         private bool isPlacing;
         private bool isManipulating;
 
@@ -29,6 +34,8 @@
         {
             togglePlacementButton.onClick.AddListener(TogglePlacementButtonPressed);
             restartBtn.onClick.AddListener(RestartBtnPressed);
+
+            HideText();
         }
 
         void TogglePlacementButtonPressed()
@@ -77,6 +84,17 @@
         private void SetButtonState(Button button, bool state)
         {
             button.GetComponent<Image>().color = state ? Color.green : Color.white;
+        }
+
+        public void DisplayText(string text)
+        {
+            textMesh.gameObject.SetActive(true);
+            textMesh.text = text;
+        }
+
+        public void HideText()
+        {
+            textMesh.gameObject.SetActive(false);
         }
     }
 }

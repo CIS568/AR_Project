@@ -21,8 +21,7 @@ namespace MyFirstARGame
         }
 
         private static GameLogic _ins = null;
-        private bool _showGameOver = false;
-        private string _gameOverMsg;
+
 
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
         static void OnBeforeSceneLoad()
@@ -44,10 +43,10 @@ namespace MyFirstARGame
         {
             IEnumerator _routine()
             {
-                _gameOverMsg = message;
-                _showGameOver = true;
+                var ui = FindObjectOfType<UIButtons>();
+                ui.DisplayText(message);
                 yield return new WaitForSeconds(4);
-                _showGameOver = false;
+                ui.HideText();
 
                 Comm.RestartGame();
             }
@@ -61,7 +60,7 @@ namespace MyFirstARGame
             _ins.GameOverSeq(message);
         }
 
-        void OnGUI()
+/*        void OnGUI()
         {
             if (_showGameOver)
             {
@@ -77,6 +76,6 @@ namespace MyFirstARGame
 
                 GUI.Label(new Rect(pos, size), content, style);
             }
-        }
+        }*/
     }
 }
