@@ -25,7 +25,7 @@ namespace MyFirstARGame
         public void IncrementScore()
         {
             var pName = $"Player {PhotonNetwork.LocalPlayer.ActorNumber}";
-            var curScore = scoreBoard.GetScore(pName);
+            var curScore = scoreBoard.GetScore(pName) + 1;
             photonView.RPC("Network_SetPlayerScore", RpcTarget.All, pName, curScore);
         }
         public void UpdateForNewPlayer(Photon.Realtime.Player player)
