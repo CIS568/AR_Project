@@ -30,7 +30,6 @@ namespace MyFirstARGame
         }
         public void UpdateForNewPlayer(Photon.Realtime.Player player)
         {
-            if (player == null) return;
             var pName = $"Player {PhotonNetwork.LocalPlayer.ActorNumber}";
             var curScore = scoreBoard.GetScore(pName);
             photonView.RPC("Network_SetPlayerScore", player, pName, curScore);

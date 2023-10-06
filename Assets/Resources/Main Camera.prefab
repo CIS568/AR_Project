@@ -363,8 +363,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ea26092fd83f46f99d5cf87d13f7e44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 5786375879518019165, guid: 133f41d7c73924e42a428ccaa1975ea6,
+  projectilePrefab: {fileID: 30883332838614829, guid: 133f41d7c73924e42a428ccaa1975ea6,
     type: 3}
-  shieldPrefab: {fileID: 5786375879518019165, guid: 7b9b3806336500646bc7a39ca9d007a3,
+  shieldPrefab: {fileID: -4328056832550463297, guid: 7b9b3806336500646bc7a39ca9d007a3,
     type: 3}
   initialSpeed: 8

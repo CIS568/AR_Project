@@ -9,10 +9,9 @@
     [RequireComponent(typeof(Camera))]
     public class ProjectileLauncher : PressInputBase
     {
-        [SerializeField]
-        private Rigidbody projectilePrefab;
+        [SerializeField] private ProjectileBehaviour projectilePrefab;
 
-        [SerializeField] private Rigidbody shieldPrefab;
+        [SerializeField] private ShieldBehavior shieldPrefab;
 
         [SerializeField]
         private float initialSpeed = 25;
@@ -34,8 +33,8 @@
             // velocity direction.
             var ray = this.GetComponent<Camera>().ScreenPointToRay(position);
 
-            var obj = GameLogic.IsOffensive() ? projectilePrefab : shieldPrefab ;
-            var projectile = PhotonNetwork.Instantiate(obj.name, ray.origin, Quaternion.identity, data: initialData);
+            var obj = GameLogic.IsOffensive() ? projectilePrefab.name : shieldPrefab.name ;
+            var projectile = PhotonNetwork.Instantiate(obj, ray.origin, Quaternion.identity, data: initialData);
 
             // By default, the projectile is kinematic in the prefab. This is because it should not be affected by physics
             // on clients other than the one owning it. Hence we disable kinematic mode and let the physics engine take over here.
@@ -45,7 +44,7 @@
             if (GameLogic.IsOffensive())
             {
                 var rg = projectile.GetComponent<Rigidbody>();
-                rg.isKinematic = false;
+                rg.useGravity = true;
                 rg.velocity = ray.direction * initialSpeed;
             }
             else

@@ -112,6 +112,8 @@ namespace MyFirstARGame
 
         public override void OnPlayerEnteredRoom(Player newPlayer)
         {
+            if (newPlayer == null) return;
+
             Debug.Log($"player {newPlayer.ActorNumber} joined!");
             this.NetworkCommunication.UpdateForNewPlayer(newPlayer);
         }
