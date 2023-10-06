@@ -95,9 +95,7 @@ namespace MyFirstARGame
         [PunRPC]
         public void Network_Restart()
         {
-            PhotonNetwork.AutomaticallySyncScene = true;
-
-            if (PhotonNetwork.IsMasterClient)
+            if (!PhotonNetwork.IsMasterClient)
             {
                 PhotonNetwork.LoadLevel(0);
             }
