@@ -31,6 +31,8 @@ namespace MyFirstARGame
         public void UpdateScore(Player player, int score)
         {
             var pName = $"Player {player.ActorNumber}";
+            Debug.Log(pName);
+
             photonView.RPC("Network_SetPlayerScore", RpcTarget.All, pName, score);
         }
 
