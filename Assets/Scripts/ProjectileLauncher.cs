@@ -48,9 +48,10 @@
                 rg.isKinematic = false;
                 rg.velocity = ray.direction * initialSpeed;
             }
-
-            var networkComm = FindObjectOfType<NetworkCommunication>();
-            networkComm.IncrementScore();
+            else
+            {
+                projectile.transform.position += transform.forward * 0.2f;
+            }
         }
     }
 }

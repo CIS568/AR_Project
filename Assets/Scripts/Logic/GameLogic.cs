@@ -22,5 +22,11 @@ namespace MyFirstARGame
         {
             return PhotonNetwork.LocalPlayer.ActorNumber % 2 == 1;
         }
+
+        public static void IncrementScore()
+        {
+            var networkComm = FindObjectOfType<NetworkCommunication>();
+            networkComm?.IncrementScore();
+        }
     }
 }
