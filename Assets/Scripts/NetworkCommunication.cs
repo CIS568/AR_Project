@@ -95,11 +95,13 @@ namespace MyFirstARGame
         [PunRPC]
         public void Network_Restart()
         {
-            PhotonNetwork.Disconnect();
-
             if (PhotonNetwork.IsMasterClient)
             {
                 PhotonNetwork.LoadLevel(0);
+            }
+            else
+            {
+                PhotonNetwork.Disconnect();
             }
         }
     }
