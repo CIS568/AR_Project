@@ -27,12 +27,15 @@ namespace MyFirstARGame
 
         void OnCollisionEnter(Collision other)
         {
-            var proj = other.gameObject.GetComponent<ShieldBehavior>();
-            if (proj && PhotonNetwork.IsMasterClient)
+            if (PhotonNetwork.IsMasterClient)
             {
-                var view = other.gameObject.GetPhotonView();
-                GameLogic.Comm.UpdateScore(view.Owner, GameLogic.Comm.GetScore(view.Owner) + 1);
-                GameLogic.Comm.Destroy(view.ViewID);
+                var proj = other.gameObject.GetComponent<ShieldBehavior>();
+                if (proj)
+                {
+                    var view = other.gameObject.GetPhotonView();
+                    GameLogic.Comm.UpdateScore(view.Owner, GameLogic.Comm.GetScore(view.Owner) + 1);
+                    GameLogic.Comm.Destroy(view.ViewID);
+                }
             }
         }
 

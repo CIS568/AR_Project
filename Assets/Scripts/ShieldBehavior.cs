@@ -21,21 +21,23 @@ namespace MyFirstARGame
         // Update is called once per frame
         void Update()
         {
-            if (_destroyed)
+            if (PhotonNetwork.IsMasterClient)
             {
-                return;
-            }
+                if (_destroyed)
+                {
+                    return;
+                }
 
-            _timer += Time.deltaTime;
+                _timer += Time.deltaTime;
 
-            if (_timer >= 5.0f)
-            {
-                var view = gameObject.GetPhotonView();
+                if (_timer >= 5.0f)
+                {
+                    var view = gameObject.GetPhotonView();
+                    GameLogic.Comm.UpdateScore(view.Owner, GameLogic.Comm.GetScore(view.Owner) + 1);
+                    GameLogic.Comm.Destroy(view.ViewID);
 
-                GameLogic.Comm.UpdateScore(view.Owner, GameLogic.Comm.GetScore(view.Owner) + 1);
-                GameLogic.Comm.Destroy(view.ViewID);
-
-                _destroyed = true;
+                    _destroyed = true;
+                }
             }
         }
 
