@@ -36,7 +36,6 @@ namespace MyFirstARGame
 
         public void Destroy(int viewId)
         {
-            PhotonNetwork.Destroy(PhotonView.Find(viewId));
             photonView.RPC("Network_Destroy", RpcTarget.All, viewId);
         }
 
@@ -52,7 +51,12 @@ namespace MyFirstARGame
             PhotonView targetShield = PhotonView.Find(viewId);
             if (targetShield != null)
             {
-                Destroy(targetShield.gameObject);
+                if (targetShield.IsMine)
+                {
+                    PhotonNetwork.Destroy(targetShield.gameObject);
+                }
+
+                // Destroy(targetShield.gameObject);
             }
         }
     }
