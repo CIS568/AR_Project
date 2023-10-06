@@ -28,6 +28,7 @@
         void Awake()
         {
             togglePlacementButton.onClick.AddListener(TogglePlacementButtonPressed);
+            restartBtn.onClick.AddListener(RestartBtnPressed);
         }
 
         void TogglePlacementButtonPressed()

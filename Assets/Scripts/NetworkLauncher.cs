@@ -117,7 +117,8 @@ namespace MyFirstARGame
                 NetworkCommunication.UpdateScore(newPlayer, 0);
                 foreach (var p in PhotonNetwork.PlayerList)
                 {
-                    if (p.ActorNumber != newPlayer.ActorNumber)
+                    if (p.ActorNumber != newPlayer.ActorNumber
+                        && !p.IsMasterClient)
                     {
                         NetworkCommunication.UpdateScore(newPlayer, p, NetworkCommunication.GetScore(p));
                     }

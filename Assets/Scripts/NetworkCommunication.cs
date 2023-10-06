@@ -57,7 +57,10 @@ namespace MyFirstARGame
 
         public void RestartGame()
         {
-            photonView.RPC("Network_RestartLevel", RpcTarget.All);
+            if (SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                PhotonNetwork.LoadLevel(0);
+            }
         }
 
         public void GameOver(int winner)
@@ -83,15 +86,6 @@ namespace MyFirstARGame
                 }
 
                 // Destroy(targetShield.gameObject);
-            }
-        }
-
-        [PunRPC]
-        public void Network_RestartLevel()
-        {
-            if (SceneManager.GetActiveScene().buildIndex == 1)
-            {
-                SceneManager.LoadScene(1);
             }
         }
 
